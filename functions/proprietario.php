@@ -139,6 +139,22 @@
         
     }
     }
+    
+    function buscar_todos(){
+        global $connection;
+        $array= [];
+        
+        try{
+            $stmnt = $connection->prepare("SELECT * FROM proprietario");
+            $stmnt->execute();
+            $array = $stmnt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex){
+            throw new Exception($ex->getCode(),$ex->getMessage()) ;
+        }
+        
+        return $array;
+    }
+    
     function apagar_proprietario($id){
         global $connection;
         //echo $id;
